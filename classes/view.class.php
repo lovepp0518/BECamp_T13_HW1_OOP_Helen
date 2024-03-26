@@ -21,7 +21,7 @@ class View
     self::clearScreen();
     printf("%-20s| %-20s\n", 'Player', 'Enemy');
     printf("%'-40s\n", '');
-    printf("%-20s| %-20s\n", 'HP:' . $player->HP, 'HP:' . $enemy->HP);
+    printf("%-20s| %-20s\n", 'HP:' . $player->healthPoint, 'HP:' . $enemy->healthPoint);
   }
 
   // 取得對戰結果

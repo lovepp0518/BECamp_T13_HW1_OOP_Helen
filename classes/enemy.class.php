@@ -7,7 +7,7 @@ class Enemy extends Character
   {
     $enemy = clone $baseline;
     $enemy->name = 'enemy' . $gameLevel;
-    $enemy->HP = ($gameLevel + 1) * 10;
+    $enemy->healthPoint = ($gameLevel + 1) * 10;
     $enemy->physicalAttack *= 1;
     $enemy->magicalAttack *= 1;
     $enemy->physicalDefense *= 1;

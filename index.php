@@ -32,16 +32,16 @@ View::getGameLevel($gameLevel);
 sleep(1);
 
 // 開始對戰
-while ($player->HP > 0 && $enemy->HP > 0 && $gameLevel > 0) {
+while ($player->healthPoint > 0 && $enemy->healthPoint > 0 && $gameLevel > 0) {
   $player->launchPhysicalAttack($enemy);
   View::updateInfo($player, $enemy);
   sleep(1);
-  if ($enemy->HP <= 0) {
+  if ($enemy->healthPoint <= 0) {
     View::getResult($gameLevel, $player);
     sleep(2);
     $player->gainExperienceValue($gameLevel);
     $player->calculatePlayerLevel();
-    $player->HP = 20; // 將玩家hp恢復(預設固定)
+    $player->healthPoint = 20; // 將玩家hp恢復(預設固定)
     $gameLevel++; //進入下一關
     $enemy = $enemy->generateNextEnemy($enemy, $gameLevel);
     View::getGameLevel($gameLevel);
@@ -49,7 +49,7 @@ while ($player->HP > 0 && $enemy->HP > 0 && $gameLevel > 0) {
   } else {
     $enemy->launchPhysicalAttack($player);
     View::updateInfo($player, $enemy);
-    if ($player->HP <= 0) {
+    if ($player->healthPoint <= 0) {
       View::getResult($gameLevel, $enemy);
       $gameLevel = 0; // 不再進入下一關
     }
