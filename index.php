@@ -2,10 +2,15 @@
 
 include 'includes/autoloader.inc.php';
 
+require_once __DIR__ . '/vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 // 資料庫連線
-$dsn = "mysql:host=localhost;port=3306;dbname=book;charset=utf8mb4";
-$username = "root";
-$password = "password";
+$dsn = $_ENV['DB_DSN'];
+$username = $_ENV['DB_USER'];
+$password = $_ENV['DB_PASS'];
 
 try {
   $pdo = new PDO($dsn, $username, $password);
