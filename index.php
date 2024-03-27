@@ -32,7 +32,7 @@ View::getGameLevel($gameLevel);
 sleep(1);
 
 // 開始對戰
-while ($player->healthPoint > 0 && $enemy->healthPoint > 0 && $gameLevel > 0) {
+while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
   $player->launchPhysicalAttack($enemy);
   View::updateInfo($player, $enemy);
   sleep(1);
@@ -51,7 +51,6 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0 && $gameLevel > 0) {
     View::updateInfo($player, $enemy);
     if ($player->healthPoint <= 0) {
       View::getResult($gameLevel, $enemy);
-      $gameLevel = 0; // 不再進入下一關
     }
   }
 }
