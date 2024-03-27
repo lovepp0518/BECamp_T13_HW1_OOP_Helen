@@ -9,10 +9,11 @@ class View
   }
 
   // 進入關卡
-  public static function getGameLevel($gameLevel)
+  public static function getGameLevel($enemy, $gameLevel)
   {
     self::clearScreen();
     echo '進入第' . $gameLevel . '關' . "\n";
+    echo '第' . $gameLevel . '關敵人為' . $enemy->name . "\n";
   }
 
   // 更新對戰資訊
