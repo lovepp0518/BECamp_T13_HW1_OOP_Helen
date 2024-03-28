@@ -97,12 +97,19 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
     sleep(2);
     $player->gainExperienceValue($gameLevel);
     $player->calculatePlayerLevel();
-    $player->healthPoint = 20; // 將玩家hp恢復(預設固定)
-    $gameLevel++; //進入下一關
-    $enemy = new Enemy($pokemonNames, $gameLevel);
-    sleep(2);
-    View::getGameLevel($enemy, $gameLevel);
-    sleep(1);
+    if ($gameLevel === 10) {
+      view::announcePlayerVictory();
+      $endTime = date("Y-m-d H:i:s");
+      $gameLevelPassed = $gameLevel;
+      $recordData = [$player->name, $gameLevelPassed, $startTime, $endTime];
+    } else {
+      $player->healthPoint = 20; // 將玩家hp恢復(預設固定)
+      $gameLevel++; //進入下一關
+      $enemy = new Enemy($pokemonNames, $gameLevel);
+      sleep(2);
+      View::getGameLevel($enemy, $gameLevel);
+      sleep(1);
+    }
   } else {
     $enemy->launchPhysicalAttack($player);
     View::updateInfo($player, $enemy);

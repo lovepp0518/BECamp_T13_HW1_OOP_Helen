@@ -61,6 +61,12 @@ class View
     echo '第' . $gameLevel . '關挑戰結果：' . $winner->name . '勝利' . "\n";
   }
 
+  // 宣布玩家勝利
+  public static function announcePlayerVictory()
+  {
+    echo '10關全數通過！玩家闖關成功！' . "\n";
+  }
+
   // 顯示全部遊戲紀錄
   public static function getRecords($recordsInDB)
   {
