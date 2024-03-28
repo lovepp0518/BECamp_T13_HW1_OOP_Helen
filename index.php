@@ -77,6 +77,10 @@ sleep(1);
 View::getGameLevel($enemy, $gameLevel);
 sleep(1);
 
+$recordData = [];
+
+$startTime = date("Y-m-d H:i:s");
+
 // 開始對戰
 while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
   $player->launchPhysicalAttack($enemy);
@@ -98,6 +102,20 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
     View::updateInfo($player, $enemy);
     if ($player->healthPoint <= 0) {
       View::getResult($gameLevel, $enemy);
+      $endTime = date("Y-m-d H:i:s");
+      $gameLevelPassed = $gameLevel - 1;
+      $recordData = [$player->name, $gameLevelPassed, $startTime, $endTime];
     }
   }
+}
+
+// 在資料庫中新增遊戲記錄資料
+$sql = "INSERT INTO records (player_name, level_passed, start_time, end_time) VALUES (?, ?, ?, ?)";
+$statement = $pdo->prepare($sql);
+
+try {
+  $statement->execute($recordData);
+  echo '新增紀錄成功！' . "\n";
+} catch (PDOException $e) {
+  echo '新增紀錄失敗: ' . $e->getMessage() . "\n";
 }
