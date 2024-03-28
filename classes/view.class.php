@@ -16,7 +16,7 @@ class View
   }
 
   // 進入開始遊戲畫面
-  public static function getMenu()
+  public static function getMenu($recordsInDB)
   {
     self::clearScreen();
     echo "歡迎來到對戰遊戲!\n";
@@ -27,14 +27,14 @@ class View
     if ($choice == "1") {
       return;
     } else if ($choice == "2") {
-      echo "顯示歷史對戰紀錄\n";
+      self::getRecords($recordsInDB);
       readline("按下Enter後回到menu...\n");
-      self::getMenu();
+      self::getMenu($recordsInDB);
     } else if ($choice == "3") {
       self::exitGame();
     } else {
       readline("輸入的選項無效，請按下Enter後重新輸入！\n");
-      self::getMenu();
+      self::getMenu($recordsInDB);
     }
   }
 
@@ -59,5 +59,14 @@ class View
   public static function getResult($gameLevel, $winner)
   {
     echo '第' . $gameLevel . '關挑戰結果：' . $winner->name . '勝利' . "\n";
+  }
+
+  // 顯示全部遊戲紀錄
+  public static function getRecords($recordsInDB)
+  {
+    self::clearScreen();
+    foreach ($recordsInDB as $recordInDB) {
+      echo '玩家名稱：' . $recordInDB['player_name'] . ' / 通關數：' . $recordInDB['level_passed'] . ' / 開始時間：' . $recordInDB['start_time'] . ' / 結束時間：' . $recordInDB['end_time'] . "\n";
+    }
   }
 }

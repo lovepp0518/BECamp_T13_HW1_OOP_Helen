@@ -18,7 +18,13 @@ try {
   echo "連線失敗: " . $e->getMessage() . "\n";
 }
 
-view::getMenu();
+// 取得全部遊戲紀錄
+$sql = "SELECT * FROM records";
+$statement = $pdo->prepare($sql);
+$statement->execute();
+$recordsInDB = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+view::getMenu($recordsInDB);
 
 // 新增玩家角色
 echo "新增玩家角色:\n";
