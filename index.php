@@ -18,8 +18,19 @@ try {
   echo "連線失敗: " . $e->getMessage() . "\n";
 }
 
-$player = new Player('player1', 20, 1, 1, 1, 1, 1, 1);
-$player->setCareer('mage');
+// 新增玩家角色
+echo "新增玩家角色:\n";
+$playerCareer = readline("Enter player's career(mage/warrior): ");
+$playerName = readline("Enter player's name: ");
+$playerHP = 20;
+$playerPhysicalAttack = (int)readline("Enter player's physical attack: ");
+$playerMagicalAttack = (int)readline("Enter player's magical attack: ");
+$playerPhysicalDefense = (int)readline("Enter player's physical defense: ");
+$playerMagicalDefense = (int)readline("Enter player's magical defense: ");
+$playerMagicValue = (int)readline("Enter player's magic value: ");
+$playerLuckValue = (int)readline("Enter player's luck value: ");
+
+$player = new Player($playerCareer, $playerName, $playerHP, $playerPhysicalAttack, $playerMagicalAttack, $playerPhysicalDefense, $playerMagicalDefense, $playerMagicValue, $playerLuckValue);
 echo '新增角色成功！' . "\n";
 sleep(1);
 

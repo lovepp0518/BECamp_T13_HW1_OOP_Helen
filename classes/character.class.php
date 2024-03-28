@@ -12,18 +12,6 @@ class Character
   public $magicValue;
   public $luckValue;
 
-  // Constructor
-  public function __construct($name, $healthPoint, $physicalAttack, $magicalAttack, $physicalDefense, $magicalDefense, $magicValue, $luckValue)
-  {
-    $this->name = $name;
-    $this->healthPoint = $healthPoint;
-    $this->physicalAttack = $physicalAttack;
-    $this->magicalAttack = $magicalAttack;
-    $this->physicalDefense = $physicalDefense;
-    $this->magicalDefense = $magicalDefense;
-    $this->magicValue = $magicValue;
-    $this->luckValue = $luckValue;
-  }
   public function launchPhysicalAttack($target)
   {
     $target->healthPoint -= $this->physicalAttack;

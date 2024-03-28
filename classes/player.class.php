@@ -7,10 +7,18 @@ class Player extends Character
   public $playerLevel;
   public $experienceValue;
 
-  // 設定職業
-  public function setCareer($career)
+  // Constructor
+  public function __construct($career, $name, $healthPoint, $physicalAttack, $magicalAttack, $physicalDefense, $magicalDefense, $magicValue, $luckValue)
   {
     $this->career = $career;
+    $this->name = $name;
+    $this->healthPoint = $healthPoint;
+    $this->physicalAttack = $physicalAttack;
+    $this->magicalAttack = $magicalAttack;
+    $this->physicalDefense = $physicalDefense;
+    $this->magicalDefense = $magicalDefense;
+    $this->magicValue = $magicValue;
+    $this->luckValue = $luckValue;
   }
 
   // 獲取經驗值
