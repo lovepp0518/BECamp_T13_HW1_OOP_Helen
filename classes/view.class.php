@@ -8,6 +8,36 @@ class View
     echo "\033[2J\033[H";
   }
 
+  // 離開遊戲畫面
+  public static function exitGame()
+  {
+    self::clearScreen();
+    echo "Thanks for playing!\n";
+  }
+
+  // 進入開始遊戲畫面
+  public static function getMenu()
+  {
+    self::clearScreen();
+    echo "歡迎來到對戰遊戲!\n";
+    echo "(1)新建角色並開始對戰\n";
+    echo "(2)查看歷史記錄\n";
+    echo "(3)離開遊戲\n";
+    $choice = readline("請輸入你的選項: ");
+    if ($choice == "1") {
+      return;
+    } else if ($choice == "2") {
+      echo "顯示歷史對戰紀錄\n";
+      readline("按下Enter後回到menu...\n");
+      self::getMenu();
+    } else if ($choice == "3") {
+      self::exitGame();
+    } else {
+      readline("輸入的選項無效，請按下Enter後重新輸入！\n");
+      self::getMenu();
+    }
+  }
+
   // 進入關卡
   public static function getGameLevel($enemy, $gameLevel)
   {

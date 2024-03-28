@@ -18,6 +18,8 @@ try {
   echo "連線失敗: " . $e->getMessage() . "\n";
 }
 
+view::getMenu();
+
 // 新增玩家角色
 echo "新增玩家角色:\n";
 $playerCareer = readline("Enter player's career(mage/warrior): ");
