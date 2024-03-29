@@ -13,6 +13,7 @@ class View
   {
     self::clearScreen();
     echo "Thanks for playing!\n";
+    exit;
   }
 
   // 進入開始遊戲畫面
