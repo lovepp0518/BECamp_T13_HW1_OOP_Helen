@@ -48,12 +48,24 @@ class View
   }
 
   // 更新對戰資訊
-  public static function updateInfo($player, $enemy)
+  public static function updateInfo($player, $enemy, $gameLevel)
   {
     self::clearScreen();
+    echo '第' . $gameLevel . '關' . "\n";
+    echo "\n";
     printf("%-20s| %-20s\n", 'Player', 'Enemy');
     printf("%'-40s\n", '');
     printf("%-20s| %-20s\n", 'HP:' . $player->healthPoint, 'HP:' . $enemy->healthPoint);
+    printf("%-20s| %-20s\n", 'physical attack:' . $player->physicalAttack, 'physical attack:' . $enemy->physicalAttack);
+    printf("%-20s| %-20s\n", 'magical attack:' . $player->magicalAttack, 'magical attack:' . $enemy->magicalAttack);
+    printf("%-20s| %-20s\n", 'Physical defense:' . $player->physicalDefense, 'Physical defense:' . $enemy->physicalDefense);
+    printf("%-20s| %-20s\n", 'Magical defense:' . $player->magicalDefense, 'Magical defense:' . $enemy->magicalDefense);
+    printf("%-20s| %-20s\n", 'Magic value:' . $player->magicValue, 'Magic value:' . $enemy->magicValue);
+    printf("%-20s| %-20s\n", 'Luck value:' . $player->luckValue, 'Luck value:' . $enemy->luckValue);
+    printf("%-20s| %-20s\n", 'Career:' . $player->career, '');
+    printf("%-20s| %-20s\n", 'Level:' . $player->playerLevel, '');
+    printf("%-20s| %-20s\n", 'Experience value:' . $player->experienceValue, '');
+    echo "\n";
   }
 
   // 取得對戰結果

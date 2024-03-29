@@ -17,6 +17,7 @@ class Enemy extends Character
   // 選擇攻擊方式
   public function enemyChooseAttack($target)
   {
+    echo '敵人發動攻擊！' . "\n";
     $attackChosen = rand(1, 2);
     if ($attackChosen == "1") {
       self::launchPhysicalAttack($target);

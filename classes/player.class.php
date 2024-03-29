@@ -29,12 +29,12 @@ class Player extends Character
     echo "(1)物理攻擊\n";
     echo "(2)魔法攻擊\n";
     $attackChosen = readline("請輸入你的選項: ");
+    echo "\n";
+    echo '玩家發動攻擊！' . "\n";
     if ($attackChosen == "1") {
       self::launchPhysicalAttack($target);
-      sleep(1);
     } else if ($attackChosen == "2") {
       self::launchMagicalAttack($target);
-      sleep(1);
     } else {
       readline("輸入的攻擊選項無效，請按下Enter後重新輸入！\n");
       self::playerChooseAttack($target);

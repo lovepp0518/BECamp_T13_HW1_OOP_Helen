@@ -14,8 +14,9 @@ $password = $_ENV['DB_PASS'];
 
 try {
   $pdo = new PDO($dsn, $username, $password);
+  echo '[資料庫提示訊息]連線成功！' . "\n";
 } catch (PDOException $e) {
-  echo "連線失敗: " . $e->getMessage() . "\n";
+  echo '[資料庫提示訊息]連線失敗: ' . $e->getMessage() . "\n";
 }
 
 // 取得全部遊戲紀錄
@@ -27,7 +28,8 @@ $recordsInDB = $statement->fetchAll(PDO::FETCH_ASSOC);
 view::getMenu($recordsInDB);
 
 // 新增玩家角色
-echo "新增玩家角色:\n";
+view::clearScreen();
+echo '新增玩家角色:' . "\n";
 $playerCareer = readline("Enter player's career(mage/warrior): ");
 $playerName = readline("Enter player's name: ");
 $playerHP = 20;
@@ -39,8 +41,9 @@ $playerMagicValue = (int)readline("Enter player's magic value: ");
 $playerLuckValue = (int)readline("Enter player's luck value: ");
 
 $player = new Player($playerCareer, $playerName, $playerHP, $playerPhysicalAttack, $playerMagicalAttack, $playerPhysicalDefense, $playerMagicalDefense, $playerMagicValue, $playerLuckValue);
-echo '新增角色成功！' . "\n";
-sleep(1);
+
+view::clearScreen();
+echo '遊戲敵人生成中，請稍候...' . "\n";
 
 $gameLevel = 1;
 
@@ -78,22 +81,20 @@ foreach ($pokemonIds as $pokemonId) {
 }
 
 $enemy = new Enemy($pokemonNames, $gameLevel);
-sleep(1);
 
 View::getGameLevel($enemy, $gameLevel);
-sleep(1);
-
-$recordData = [];
+sleep(2);
 
 $startTime = date("Y-m-d H:i:s");
 
 // 開始對戰
 while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
-  // 玩家選擇攻擊方式
-  $player->playerChooseAttack($enemy);
+  View::updateInfo($player, $enemy, $gameLevel);
 
-  View::updateInfo($player, $enemy);
-  sleep(1);
+  // 玩家開始攻擊
+  $player->playerChooseAttack($enemy);
+  View::updateInfo($player, $enemy, $gameLevel);
+
   if ($enemy->healthPoint <= 0) {
     View::getResult($gameLevel, $player);
     sleep(2);
@@ -108,16 +109,15 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
       $player->healthPoint = 20; // 將玩家hp恢復(預設固定)
       $gameLevel++; //進入下一關
       $enemy = new Enemy($pokemonNames, $gameLevel);
-      sleep(2);
       View::getGameLevel($enemy, $gameLevel);
       sleep(1);
     }
-  } else {
-    // 敵人選擇攻擊方式
-    $enemy->enemyChooseAttack($player);
 
-    $enemy->launchPhysicalAttack($player);
-    View::updateInfo($player, $enemy);
+    // 敵人開始攻擊
+  } else {
+    $enemy->enemyChooseAttack($player);
+    View::updateInfo($player, $enemy, $gameLevel);
+
     if ($player->healthPoint <= 0) {
       View::getResult($gameLevel, $enemy);
       $endTime = date("Y-m-d H:i:s");
@@ -133,7 +133,7 @@ $statement = $pdo->prepare($sql);
 
 try {
   $statement->execute($recordData);
-  echo '新增紀錄成功！' . "\n";
+  echo '[資料庫提示訊息]新增紀錄成功！' . "\n";
 } catch (PDOException $e) {
-  echo '新增紀錄失敗: ' . $e->getMessage() . "\n";
+  echo '[資料庫提示訊息]新增紀錄失敗: ' . $e->getMessage() . "\n";
 }
