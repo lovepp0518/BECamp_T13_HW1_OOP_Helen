@@ -13,4 +13,18 @@ class Enemy extends Character
     $this->magicValue = rand(1, 2);
     $this->luckValue = rand(1, 2);
   }
+
+  // 選擇攻擊方式
+  public function enemyChooseAttack($target)
+  {
+    $attackChosen = rand(1, 2);
+    if ($attackChosen == "1") {
+      self::launchPhysicalAttack($target);
+    } else if ($attackChosen == "2") {
+      self::launchMagicalAttack($target);
+    } else {
+      echo 'error!' . "\n";
+    }
+    sleep(1);
+  }
 }

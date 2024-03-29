@@ -89,7 +89,9 @@ $startTime = date("Y-m-d H:i:s");
 
 // 開始對戰
 while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
-  $player->launchPhysicalAttack($enemy);
+  // 玩家選擇攻擊方式
+  $player->playerChooseAttack($enemy);
+
   View::updateInfo($player, $enemy);
   sleep(1);
   if ($enemy->healthPoint <= 0) {
@@ -111,6 +113,9 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
       sleep(1);
     }
   } else {
+    // 敵人選擇攻擊方式
+    $enemy->enemyChooseAttack($player);
+
     $enemy->launchPhysicalAttack($player);
     View::updateInfo($player, $enemy);
     if ($player->healthPoint <= 0) {
