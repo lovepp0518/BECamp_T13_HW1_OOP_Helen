@@ -34,7 +34,7 @@ view::clearScreen();
 echo '新增玩家角色:' . "\n";
 $playerCareer = readline("Enter player's career(mage/warrior): ");
 $playerName = readline("Enter player's name: ");
-$playerHealthPoint = 20;
+$playerHealthPoint = 100;
 $playerPhysicalAttack = (int)readline("Enter player's physical attack: ");
 $playerMagicalAttack = (int)readline("Enter player's magical attack: ");
 $playerPhysicalDefense = (int)readline("Enter player's physical defense: ");
@@ -44,8 +44,6 @@ $playerLuckValue = (int)readline("Enter player's luck value(1-5): ");
 
 $player = new Player($playerCareer, $playerName, $playerHealthPoint, $playerPhysicalAttack, $playerMagicalAttack, $playerPhysicalDefense, $playerMagicalDefense, $playerMagicValue, $playerLuckValue);
 
-var_dump($player);
-sleep(2);
 view::clearScreen();
 echo '遊戲敵人生成中，請稍候...' . "\n";
 
@@ -111,7 +109,7 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
       $gameLevelPassed = $gameLevel;
       $recordData = [$player->name, $gameLevelPassed, $startTime, $endTime];
     } else {
-      $player->healthPoint = 20; // 將玩家hp恢復(預設固定)
+      $player->healthPoint = 100; // 將玩家hp恢復(預設固定)
       $gameLevel++; //進入下一關
       $enemy = new Enemy($pokemonNames, $gameLevel);
       View::getGameLevel($enemy, $gameLevel);
