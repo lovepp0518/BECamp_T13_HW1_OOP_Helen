@@ -14,10 +14,18 @@ class Character
 
   public function launchPhysicalAttack($target)
   {
-    $target->healthPoint -= $this->physicalAttack;
-    echo "\n";
-    echo '物理攻擊發動！' . "\n";
-    echo "{$this->name} 攻擊 {$target->name}. {$target->name} 減少血量 {$this->physicalAttack}，{$target->name} 目前血量 {$target->healthPoint}.\n";
+    $criticalHitFactor = rand(1, 100);
+    if (($this->luckValue === 1 && $criticalHitFactor <= 10) ||  ($this->luckValue === 2 && $criticalHitFactor <= 20) || ($this->luckValue === 3 && $criticalHitFactor <= 30) || ($this->luckValue === 4 && $criticalHitFactor <= 40) || ($this->luckValue === 5 && $criticalHitFactor <= 50)) {
+      $target->healthPoint -= ($this->physicalAttack) * 2;
+      echo "\n";
+      echo '物理攻擊發動！產生爆擊傷害加倍！' . "\n";
+      echo "{$this->name} 攻擊 {$target->name}. {$target->name} 減少血量 {$this->physicalAttack}*2，{$target->name} 目前血量 {$target->healthPoint}.\n";
+    } else {
+      $target->healthPoint -= $this->physicalAttack;
+      echo "\n";
+      echo '物理攻擊發動！' . "\n";
+      echo "{$this->name} 攻擊 {$target->name}. {$target->name} 減少血量 {$this->physicalAttack}，{$target->name} 目前血量 {$target->healthPoint}.\n";
+    }
     sleep(1);
   }
 

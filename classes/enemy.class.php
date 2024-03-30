@@ -11,7 +11,7 @@ class Enemy extends Character
     $this->physicalDefense = rand(1, 2);
     $this->magicalDefense = rand(1, 2);
     $this->magicValue = 10;
-    $this->luckValue = rand(1, 2);
+    $this->luckValue = rand(1, 5);
   }
 
   // 選擇攻擊方式
