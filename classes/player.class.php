@@ -8,7 +8,7 @@ class Player extends Character
   public $experienceValue;
 
   // Constructor
-  public function __construct($career, $name, $healthPoint, $physicalAttack, $magicalAttack, $physicalDefense, $magicalDefense, $luckValue)
+  public function __construct($career, $name, $healthPoint, $physicalAttack, $magicalAttack, $physicalDefense, $magicalDefense, $magicValue, $luckValue)
   {
     $this->career = $career;
     $this->name = $name;
@@ -17,6 +17,7 @@ class Player extends Character
     $this->magicalAttack = $magicalAttack;
     $this->physicalDefense = $physicalDefense;
     $this->magicalDefense = $magicalDefense;
+    $this->magicValue = $magicValue;
     $this->luckValue = $luckValue;
   }
 
