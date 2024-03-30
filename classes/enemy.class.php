@@ -24,7 +24,7 @@ class Enemy extends Character
     } else if ($attackChosen == "2") {
       self::launchMagicalAttack($target);
     } else {
-      echo 'error!' . "\n";
+      echo '無效攻擊！' . "\n";
     }
     sleep(1);
   }

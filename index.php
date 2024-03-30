@@ -15,8 +15,10 @@ $password = $_ENV['DB_PASS'];
 try {
   $pdo = new PDO($dsn, $username, $password);
   echo '[資料庫提示訊息]連線成功！' . "\n";
+  sleep(1);
 } catch (PDOException $e) {
   echo '[資料庫提示訊息]連線失敗: ' . $e->getMessage() . "\n";
+  sleep(1);
 }
 
 // 取得全部遊戲紀錄

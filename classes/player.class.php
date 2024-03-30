@@ -25,9 +25,7 @@ class Player extends Character
   // 選擇攻擊方式
   public function playerChooseAttack($target)
   {
-    echo "請選擇攻擊方式\n";
-    echo "(1)物理攻擊\n";
-    echo "(2)魔法攻擊\n";
+    echo "請選擇攻擊方式 (1)物理攻擊 (2)魔法攻擊\n";
     $attackChosen = readline("請輸入你的選項: ");
     echo "\n";
     echo '玩家發動攻擊！' . "\n";
@@ -36,8 +34,8 @@ class Player extends Character
     } else if ($attackChosen == "2") {
       self::launchMagicalAttack($target);
     } else {
-      readline("輸入的攻擊選項無效，請按下Enter後重新輸入！\n");
-      self::playerChooseAttack($target);
+      echo '無效攻擊！' . "\n";
+      sleep(1);
     }
   }
 
