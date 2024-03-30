@@ -19,6 +19,8 @@ class Player extends Character
     $this->magicalDefense = $magicalDefense;
     $this->magicValue = $magicValue;
     $this->luckValue = $luckValue;
+    $this->playerLevel = 1;
+    $this->experienceValue = 0;
   }
 
 
