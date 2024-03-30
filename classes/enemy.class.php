@@ -10,7 +10,7 @@ class Enemy extends Character
     $this->magicalAttack = rand(1, 2);
     $this->physicalDefense = rand(1, 2);
     $this->magicalDefense = rand(1, 2);
-    $this->magicValue = rand(1, 2);
+    $this->magicValue = 10;
     $this->luckValue = rand(1, 2);
   }
 
@@ -24,7 +24,7 @@ class Enemy extends Character
     } else if ($attackChosen == "2") {
       self::launchMagicalAttack($target);
     } else {
-      echo '無效攻擊！' . "\n";
+      echo '無效攻擊！選擇攻擊方式無效！' . "\n";
     }
     sleep(1);
   }

@@ -39,7 +39,7 @@ $playerPhysicalAttack = (int)readline("Enter player's physical attack: ");
 $playerMagicalAttack = (int)readline("Enter player's magical attack: ");
 $playerPhysicalDefense = (int)readline("Enter player's physical defense: ");
 $playerMagicalDefense = (int)readline("Enter player's magical defense: ");
-$playerMagicValue = (int)readline("Enter player's magic value: ");
+$playerMagicValue = 10;
 $playerLuckValue = (int)readline("Enter player's luck value: ");
 
 $player = new Player($playerCareer, $playerName, $playerHP, $playerPhysicalAttack, $playerMagicalAttack, $playerPhysicalDefense, $playerMagicalDefense, $playerMagicValue, $playerLuckValue);
@@ -96,6 +96,7 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
   // 玩家開始攻擊
   $player->playerChooseAttack($enemy);
   View::updateInfo($player, $enemy, $gameLevel);
+  $player->restoreMagicValue();
 
   if ($enemy->healthPoint <= 0) {
     View::getResult($gameLevel, $player);
@@ -119,6 +120,7 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
   } else {
     $enemy->enemyChooseAttack($player);
     View::updateInfo($player, $enemy, $gameLevel);
+    $enemy->restoreMagicValue();
 
     if ($player->healthPoint <= 0) {
       View::getResult($gameLevel, $enemy);
