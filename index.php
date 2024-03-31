@@ -85,7 +85,6 @@ foreach ($pokemonIds as $pokemonId) {
 $enemy = new Enemy($pokemonNames, $gameLevel);
 
 View::getGameLevel($enemy, $gameLevel);
-sleep(2);
 
 $startTime = date("Y-m-d H:i:s");
 
@@ -100,7 +99,6 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
 
   if ($enemy->healthPoint <= 0) {
     View::getResult($gameLevel, $player);
-    sleep(2);
     $player->gainExperienceValue($gameLevel);
     $player->calculatePlayerLevel();
     if ($gameLevel === 10) {
@@ -113,7 +111,6 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
       $gameLevel++; //進入下一關
       $enemy = new Enemy($pokemonNames, $gameLevel);
       View::getGameLevel($enemy, $gameLevel);
-      sleep(1);
     }
 
     // 敵人開始攻擊

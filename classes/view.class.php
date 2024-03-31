@@ -45,6 +45,7 @@ class View
     self::clearScreen();
     echo '進入第' . $gameLevel . '關' . "\n";
     echo '第' . $gameLevel . '關敵人為' . $enemy->name . "\n";
+    sleep(2);
   }
 
   // 更新對戰資訊
@@ -72,6 +73,7 @@ class View
   public static function getResult($gameLevel, $winner)
   {
     echo '第' . $gameLevel . '關挑戰結果：' . $winner->name . '勝利' . "\n";
+    sleep(2);
   }
 
   // 宣布玩家勝利
