@@ -8,21 +8,20 @@ class Player extends Character
   public $experienceValue;
 
   // Constructor
-  public function __construct($career, $name, $healthPoint, $physicalAttack, $magicalAttack, $physicalDefense, $magicalDefense, $magicValue, $luckValue)
+  public function __construct()
   {
-    $this->career = $career;
-    $this->name = $name;
-    $this->healthPoint = $healthPoint;
-    $this->physicalAttack = $physicalAttack;
-    $this->magicalAttack = $magicalAttack;
-    $this->physicalDefense = $physicalDefense;
-    $this->magicalDefense = $magicalDefense;
-    $this->magicValue = $magicValue;
-    $this->luckValue = $luckValue;
+    $this->career = readline("Enter player's career(mage/warrior): ");
+    $this->name = readline("Enter player's name: ");
+    $this->healthPoint = 100;
+    $this->physicalAttack = (int)readline("Enter player's physical attack: ");
+    $this->magicalAttack = (int)readline("Enter player's magical attack: ");
+    $this->physicalDefense = (int)readline("Enter player's physical defense: ");
+    $this->magicalDefense = (int)readline("Enter player's magical defense: ");
+    $this->magicValue = 10;
+    $this->luckValue = (int)readline("Enter player's luck value(1-5): ");
     $this->playerLevel = 1;
     $this->experienceValue = 0;
   }
-
 
   // 選擇攻擊方式
   public function playerChooseAttack($target)

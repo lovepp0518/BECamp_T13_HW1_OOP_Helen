@@ -11,17 +11,8 @@ view::getMenu($recordsInDB);
 // 新增玩家角色
 view::clearScreen();
 echo '新增玩家角色:' . "\n";
-$playerCareer = readline("Enter player's career(mage/warrior): ");
-$playerName = readline("Enter player's name: ");
-$playerHealthPoint = 100;
-$playerPhysicalAttack = (int)readline("Enter player's physical attack: ");
-$playerMagicalAttack = (int)readline("Enter player's magical attack: ");
-$playerPhysicalDefense = (int)readline("Enter player's physical defense: ");
-$playerMagicalDefense = (int)readline("Enter player's magical defense: ");
-$playerMagicValue = 10;
-$playerLuckValue = (int)readline("Enter player's luck value(1-5): ");
 
-$player = new Player($playerCareer, $playerName, $playerHealthPoint, $playerPhysicalAttack, $playerMagicalAttack, $playerPhysicalDefense, $playerMagicalDefense, $playerMagicValue, $playerLuckValue);
+$player = new Player();
 
 view::clearScreen();
 echo '遊戲敵人生成中，請稍候...' . "\n";
