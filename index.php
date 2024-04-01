@@ -19,38 +19,7 @@ echo '遊戲敵人生成中，請稍候...' . "\n";
 
 $gameLevel = 1;
 
-// 藉由pokeAPI預生成10個不重複敵人名稱(預設僅有10個關卡)
-// 產生不重複隨機整數
-function generateUniqueRandomNumbers($min, $max, $count)
-{
-  $randomNumbers = [];
-
-  while (count($randomNumbers) < $count) {
-    $randomNumber = rand($min, $max);
-    if (!in_array($randomNumber, $randomNumbers)) {
-      $randomNumbers[] = $randomNumber;
-    }
-  }
-
-  return $randomNumbers;
-}
-
-// 產生10個介於1到1000之間的隨機整數
-$pokemonIds = generateUniqueRandomNumbers(1, 1000, 10);
-
-// 串接pokeAPI
-foreach ($pokemonIds as $pokemonId) {
-  // API 端點 URL
-  $url = "https://pokeapi.co/api/v2/pokemon/$pokemonId";
-
-  // 向 API 發送 GET 請求並取得回應
-  $response = file_get_contents($url);
-
-  // 如果回應為 JSON 格式，可以使用 json_decode 函式將其轉換為 PHP 陣列或物件
-  $data = json_decode($response, true); // 第二個參數為 true 表示將 JSON 解析為關聯陣列
-
-  $pokemonNames[] = $data['name'];
-}
+$pokemonNames = Enemy::generateEnemyNames();
 
 $enemy = new Enemy($pokemonNames, $gameLevel);
 
