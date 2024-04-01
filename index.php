@@ -2,30 +2,9 @@
 
 include 'includes/autoloader.inc.php';
 
-require_once __DIR__ . '/vendor/autoload.php';
-
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
-// 資料庫連線
-$dsn = $_ENV['DB_DSN'];
-$username = $_ENV['DB_USER'];
-$password = $_ENV['DB_PASS'];
-
-try {
-  $pdo = new PDO($dsn, $username, $password);
-  echo '[資料庫提示訊息]連線成功！' . "\n";
-  sleep(1);
-} catch (PDOException $e) {
-  echo '[資料庫提示訊息]連線失敗: ' . $e->getMessage() . "\n";
-  sleep(1);
-}
-
 // 取得全部遊戲紀錄
-$sql = "SELECT * FROM records";
-$statement = $pdo->prepare($sql);
-$statement->execute();
-$recordsInDB = $statement->fetchAll(PDO::FETCH_ASSOC);
+$db = new Database();
+$recordsInDB = $db->query("SELECT * FROM records");
 
 view::getMenu($recordsInDB);
 
@@ -129,12 +108,4 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
 }
 
 // 在資料庫中新增遊戲記錄資料
-$sql = "INSERT INTO records (player_name, level_passed, start_time, end_time) VALUES (?, ?, ?, ?)";
-$statement = $pdo->prepare($sql);
-
-try {
-  $statement->execute($recordData);
-  echo '[資料庫提示訊息]新增紀錄成功！' . "\n";
-} catch (PDOException $e) {
-  echo '[資料庫提示訊息]新增紀錄失敗: ' . $e->getMessage() . "\n";
-}
+$db->insert("INSERT INTO records (player_name, level_passed, start_time, end_time) VALUES (?, ?, ?, ?)", $recordData);
