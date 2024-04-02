@@ -11,11 +11,17 @@ class Character
   public $magicalDefense;
   public $magicValue;
   public $luckValue;
+  private $criticalHitFactor;
+
+  private function determineCriticalHit()
+  {
+    $this->criticalHitFactor = rand(1, 100);
+    return $this->criticalHitFactor <= ($this->luckValue) * 10;
+  }
 
   public function launchPhysicalAttack($target)
   {
-    $criticalHitFactor = rand(1, 100);
-    if (($this->luckValue === 1 && $criticalHitFactor <= 10) ||  ($this->luckValue === 2 && $criticalHitFactor <= 20) || ($this->luckValue === 3 && $criticalHitFactor <= 30) || ($this->luckValue === 4 && $criticalHitFactor <= 40) || ($this->luckValue === 5 && $criticalHitFactor <= 50)) {
+    if (self::determineCriticalHit()) {
       $target->healthPoint = $target->healthPoint - (($this->physicalAttack * 5) * 2 - $target->physicalDefense);
       echo "\n";
       echo '物理攻擊發動！產生爆擊傷害加倍！' . "\n";
