@@ -17,55 +17,50 @@ $player = new Player();
 view::clearScreen();
 echo '遊戲敵人生成中，請稍候...' . "\n";
 
-$gameLevel = 1;
+$record = new Record($player->name);
 
 $pokemonNames = Enemy::generateEnemyNames();
 
-$enemy = new Enemy($pokemonNames, $gameLevel);
+$enemy = new Enemy($pokemonNames, $record->gameLevel);
 
-View::getGameLevel($enemy, $gameLevel);
-
-$startTime = date("Y-m-d H:i:s");
+View::getGameLevel($enemy, $record->gameLevel);
 
 // 開始對戰
 while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
-  View::updateInfo($player, $enemy, $gameLevel);
+  View::updateInfo($player, $enemy, $record->gameLevel);
 
   // 玩家開始攻擊
   $player->playerChooseAttack($enemy);
-  View::updateInfo($player, $enemy, $gameLevel);
+  View::updateInfo($player, $enemy, $record->gameLevel);
   $player->restoreMagicValue();
 
   if ($enemy->healthPoint <= 0) {
-    View::getResult($gameLevel, $player);
-    $player->gainExperienceValue($gameLevel);
+    View::getResult($record->gameLevel, $player);
+    $player->gainExperienceValue($record->gameLevel);
     $player->calculatePlayerLevel();
-    if ($gameLevel === 10) {
+
+    if ($record->gameLevel === 10) {
       view::announcePlayerVictory();
-      $endTime = date("Y-m-d H:i:s");
-      $gameLevelPassed = $gameLevel;
-      $recordData = [$player->name, $gameLevelPassed, $startTime, $endTime];
+      $record->getRecord($enemy);
     } else {
       $player->healthPoint = 100; // 將玩家hp恢復(預設固定)
-      $gameLevel++; //進入下一關
-      $enemy = new Enemy($pokemonNames, $gameLevel);
-      View::getGameLevel($enemy, $gameLevel);
+      $record->getNextGameLevel();
+      $enemy = new Enemy($pokemonNames, $record->gameLevel);
+      View::getGameLevel($enemy, $record->gameLevel);
     }
 
     // 敵人開始攻擊
   } else {
     $enemy->enemyChooseAttack($player);
-    View::updateInfo($player, $enemy, $gameLevel);
+    View::updateInfo($player, $enemy, $record->gameLevel);
     $enemy->restoreMagicValue();
 
     if ($player->healthPoint <= 0) {
-      View::getResult($gameLevel, $enemy);
-      $endTime = date("Y-m-d H:i:s");
-      $gameLevelPassed = $gameLevel - 1;
-      $recordData = [$player->name, $gameLevelPassed, $startTime, $endTime];
+      View::getResult($record->gameLevel, $enemy);
+      $record->getRecord($enemy);
     }
   }
 }
 
 // 在資料庫中新增遊戲記錄資料
-$db->insert("INSERT INTO records (player_name, level_passed, start_time, end_time) VALUES (?, ?, ?, ?)", $recordData);
+$db->insert("INSERT INTO records (player_name, level_passed, start_time, end_time) VALUES (?, ?, ?, ?)", [$record->playerName, $record->gameLevelPassed, $record->startTime, $record->endTime]);
