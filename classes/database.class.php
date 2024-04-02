@@ -37,7 +37,5 @@ class Database
   {
     $statement = $this->connection->prepare($insert);
     $statement->execute($data);
-
-    $statement->execute($data);
   }
 }
