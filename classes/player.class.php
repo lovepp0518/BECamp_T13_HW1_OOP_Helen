@@ -6,18 +6,21 @@ class Player extends Character
   public $career;
   public $playerLevel;
   public $experienceValue;
+  const EXPERIENCE_VALUE_GAIN_PER_GAME_LEVEL = 100;
+  const EXPERIENCE_VALUE_REQUIRED_FOR_LEVEL_UP = 300;
+  const BOSS_LEVEL_INTERVAL = 5;
 
   // Constructor
   public function __construct()
   {
     $this->career = readline("Enter player's career(mage/warrior): ");
     $this->name = readline("Enter player's name: ");
-    $this->healthPoint = 100;
+    $this->healthPoint = self::DEFAULT_HEALTH_POINT;
     $this->physicalAttack = (int)readline("Enter player's physical attack: ");
     $this->magicalAttack = (int)readline("Enter player's magical attack: ");
     $this->physicalDefense = (int)readline("Enter player's physical defense: ");
     $this->magicalDefense = (int)readline("Enter player's magical defense: ");
-    $this->magicValue = 10;
+    $this->magicValue = self::DEFAULT_MAGIC_VALUE;
     $this->luckValue = (int)readline("Enter player's luck value(1-5): ");
     $this->playerLevel = 1;
     $this->experienceValue = 0;
@@ -44,22 +47,21 @@ class Player extends Character
   public function gainExperienceValue($gameLevel)
   {
     if (
-      $gameLevel % 5 === 0
+      $gameLevel % self::BOSS_LEVEL_INTERVAL === 0
     ) {
-      $this->experienceValue += 200;
+      $this->experienceValue += (self::EXPERIENCE_VALUE_GAIN_PER_GAME_LEVEL * 2);
     } else {
-      $this->experienceValue += 100;
+      $this->experienceValue += self::EXPERIENCE_VALUE_GAIN_PER_GAME_LEVEL;
     }
   }
 
   // 經驗值換算角色等級
   public function calculatePlayerLevel()
   {
-    $playerLevelUpFactor = 300;
-    $playerLevelUp = floor($this->experienceValue / $playerLevelUpFactor);
+    $playerLevelUp = floor($this->experienceValue / self::EXPERIENCE_VALUE_REQUIRED_FOR_LEVEL_UP);
     if ($playerLevelUp >= 1) {
       $this->playerLevel += $playerLevelUp;
-      $this->experienceValue -= $playerLevelUpFactor * $playerLevelUp;
+      $this->experienceValue -= self::EXPERIENCE_VALUE_REQUIRED_FOR_LEVEL_UP * $playerLevelUp;
       if ($this->career === 'mage') {
         $this->magicalAttack *= 2;
         $this->magicalDefense *= 2;

@@ -5,12 +5,12 @@ class Enemy extends Character
   public function __construct($enemyNames, $gameLevel)
   {
     $this->name = $enemyNames[($gameLevel - 1)];
-    $this->healthPoint = 100;
+    $this->healthPoint = self::DEFAULT_HEALTH_POINT;
     $this->physicalAttack = rand(1, 2);
     $this->magicalAttack = rand(1, 2);
     $this->physicalDefense = rand(1, 2);
     $this->magicalDefense = rand(1, 2);
-    $this->magicValue = 10;
+    $this->magicValue = self::DEFAULT_MAGIC_VALUE;
     $this->luckValue = rand(1, 5);
   }
 

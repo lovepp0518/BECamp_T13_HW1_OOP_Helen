@@ -11,12 +11,12 @@ class Database
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
     $dotenv->load();
 
-    $dsn = $_ENV['DB_DSN'];
-    $username = $_ENV['DB_USER'];
-    $password = $_ENV['DB_PASS'];
+    $dataSourceName = $_ENV['DATABASE_DATA_SOURCE_NAME'];
+    $username = $_ENV['DATABASE_USERNAME'];
+    $password = $_ENV['DATABASE_PASSWORD'];
 
     try {
-      $this->connection = new PDO($dsn, $username, $password);
+      $this->connection = new PDO($dataSourceName, $username, $password);
       echo '[資料庫提示訊息]連線成功！' . "\n";
       sleep(1);
     } catch (PDOException $e) {

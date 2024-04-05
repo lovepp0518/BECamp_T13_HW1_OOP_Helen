@@ -3,18 +3,18 @@
 include 'includes/autoloader.inc.php';
 
 // 取得全部遊戲紀錄
-$db = new Database();
-$recordsInDB = $db->query("SELECT * FROM records");
+$dataBase = new Database();
+$recordsInDB = $dataBase->query("SELECT * FROM records");
 
-view::getMenu($recordsInDB);
+View::getMenu($recordsInDB);
 
 // 新增玩家角色
-view::clearScreen();
+View::clearScreen();
 echo '新增玩家角色:' . "\n";
 
 $player = new Player();
 
-view::clearScreen();
+View::clearScreen();
 echo '遊戲敵人生成中，請稍候...' . "\n";
 
 $record = new Record($player->name);
@@ -40,7 +40,7 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
     $player->calculatePlayerLevel();
 
     if ($record->gameLevel === 10) {
-      view::announcePlayerVictory();
+      View::announcePlayerVictory();
       $record->getRecord($enemy);
     } else {
       $player->healthPoint = 100; // 將玩家hp恢復(預設固定)
@@ -63,4 +63,4 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
 }
 
 // 在資料庫中新增遊戲記錄資料
-$db->insert("INSERT INTO records (player_name, level_passed, start_time, end_time) VALUES (?, ?, ?, ?)", [$record->playerName, $record->gameLevelPassed, $record->startTime, $record->endTime]);
+$dataBase->insert("INSERT INTO records (player_name, level_passed, start_time, end_time) VALUES (?, ?, ?, ?)", [$record->playerName, $record->gameLevelPassed, $record->startTime, $record->endTime]);
