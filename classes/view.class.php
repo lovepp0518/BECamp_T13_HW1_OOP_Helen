@@ -39,6 +39,20 @@ class View
     }
   }
 
+  // 新增玩家角色
+  public static function addPlayerCharacter()
+  {
+    self::clearScreen();
+    echo '新增玩家角色:' . "\n";
+  }
+
+  // 等待遊戲敵人生成
+  public static function waitForGeneratingEnemy()
+  {
+    self::clearScreen();
+    echo '遊戲敵人生成中，請稍候...' . "\n";
+  }
+
   // 進入關卡
   public static function getGameLevel($enemy, $gameLevel)
   {

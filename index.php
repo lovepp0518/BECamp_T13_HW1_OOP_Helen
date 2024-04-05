@@ -8,14 +8,11 @@ $recordsInDB = $dataBase->query("SELECT * FROM records");
 
 View::getMenu($recordsInDB);
 
-// 新增玩家角色
-View::clearScreen();
-echo '新增玩家角色:' . "\n";
+View::addPlayerCharacter();
 
 $player = new Player();
 
-View::clearScreen();
-echo '遊戲敵人生成中，請稍候...' . "\n";
+View::waitForGeneratingEnemy();
 
 $record = new Record($player->name);
 
@@ -43,7 +40,7 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
       View::announcePlayerVictory();
       $record->getRecord($enemy);
     } else {
-      $player->healthPoint = 100; // 將玩家hp恢復(預設固定)
+      $player->healthPoint = $player::DEFAULT_HEALTH_POINT;
       $record->getNextGameLevel();
       $enemy = new Enemy($pokemonNames, $record->gameLevel);
       View::getGameLevel($enemy, $record->gameLevel);
