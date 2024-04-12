@@ -15,29 +15,42 @@ class Enemy extends Character
   }
 
   // 藉由pokeAPI預生成10個不重複敵人名稱(預設僅有10個關卡)
+  // public static function generateEnemyNames()
+  // {
+  //   $pokemonIds = [];
+
+  //   while (count($pokemonIds) < 10) {
+  //     $randomNumber = rand(1, 1025);
+  //     if (!in_array($randomNumber, $pokemonIds)) {
+  //       $pokemonIds[] = $randomNumber;
+  //     }
+  //   }
+
+  //   // 串接pokeAPI
+  //   foreach ($pokemonIds as $pokemonId) {
+  //     // API 端點 URL
+  //     $url = "https://pokeapi.co/api/v2/pokemon/$pokemonId";
+
+  //     // 向 API 發送 GET 請求並取得回應
+  //     $response = file_get_contents($url);
+
+  //     // 如果回應為 JSON 格式，可以使用 json_decode 函式將其轉換為 PHP 陣列或物件
+  //     $data = json_decode($response, true); // 第二個參數為 true 表示將 JSON 解析為關聯陣列
+
+  //     $pokemonNames[] = $data['name'];
+  //   }
+
+  //   return $pokemonNames;
+  // }
+
+  // 新方法
   public static function generateEnemyNames()
   {
-    $pokemonIds = [];
+    require_once __DIR__ . '/../vendor/autoload.php';
+    $faker = Faker\Factory::create();
 
-    while (count($pokemonIds) < 10) {
-      $randomNumber = rand(1, 1025);
-      if (!in_array($randomNumber, $pokemonIds)) {
-        $pokemonIds[] = $randomNumber;
-      }
-    }
-
-    // 串接pokeAPI
-    foreach ($pokemonIds as $pokemonId) {
-      // API 端點 URL
-      $url = "https://pokeapi.co/api/v2/pokemon/$pokemonId";
-
-      // 向 API 發送 GET 請求並取得回應
-      $response = file_get_contents($url);
-
-      // 如果回應為 JSON 格式，可以使用 json_decode 函式將其轉換為 PHP 陣列或物件
-      $data = json_decode($response, true); // 第二個參數為 true 表示將 JSON 解析為關聯陣列
-
-      $pokemonNames[] = $data['name'];
+    for ($i = 0; $i < 10; $i++) {
+      $pokemonNames[] = $faker->unique()->name();
     }
 
     return $pokemonNames;
