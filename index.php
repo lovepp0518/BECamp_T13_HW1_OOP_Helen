@@ -1,6 +1,12 @@
 <?php
 
-include 'includes/autoloader.inc.php';
+require 'vendor/autoload.php';
+
+use Classes\Database;
+use Classes\Enemy;
+use Classes\Player;
+use Classes\Record;
+use Classes\View;
 
 // 取得全部遊戲紀錄
 $dataBase = new Database();

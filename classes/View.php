@@ -1,5 +1,7 @@
 <?php
 
+namespace Classes;
+
 class View
 {
   // 清空螢幕畫面

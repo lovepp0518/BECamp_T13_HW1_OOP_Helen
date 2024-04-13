@@ -1,5 +1,11 @@
 <?php
 
+namespace Classes;
+
+use Dotenv;
+use PDO;
+use PDOException;
+
 class Database
 {
   public $connection;

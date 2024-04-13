@@ -1,5 +1,7 @@
 <?php
 
+namespace Classes;
+
 class Player extends Character
 {
   // Properties
