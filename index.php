@@ -12,20 +12,17 @@ use Classes\View;
 $dataBase = new Database();
 $recordsInDB = $dataBase->query("SELECT * FROM records");
 
+// 進入主選單畫面
 View::getMenu($recordsInDB);
 
+// 新增玩家角色
 View::addPlayerCharacter();
-
 $player = new Player();
 
-View::waitForGeneratingEnemy();
-
+// 生成遊戲記錄和敵人並進入關卡
 $record = new Record($player->name);
-
-$pokemonNames = Enemy::generateEnemyNames();
-
-$enemy = new Enemy($pokemonNames, $record->gameLevel);
-
+$enemyNames = Enemy::generateEnemyNames();
+$enemy = new Enemy($enemyNames, $record->gameLevel);
 View::getGameLevel($enemy, $record->gameLevel);
 
 // 開始對戰
@@ -42,13 +39,14 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
     $player->gainExperienceValue($record->gameLevel);
     $player->calculatePlayerLevel();
 
+    // 假設遊戲共10關，玩家連贏10關為闖關成功
     if ($record->gameLevel === 10) {
       View::announcePlayerVictory();
       $record->getRecord($enemy);
     } else {
       $player->healthPoint = $player::DEFAULT_HEALTH_POINT;
       $record->getNextGameLevel();
-      $enemy = new Enemy($pokemonNames, $record->gameLevel);
+      $enemy = new Enemy($enemyNames, $record->gameLevel);
       View::getGameLevel($enemy, $record->gameLevel);
     }
 

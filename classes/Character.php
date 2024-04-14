@@ -4,7 +4,6 @@ namespace Classes;
 
 class Character
 {
-  // Properties
   public $name;
   public $healthPoint;
   public $physicalAttack;
@@ -43,7 +42,6 @@ class Character
 
   public function launchMagicalAttack($target)
   {
-    // 若本身魔力量大於最小魔力消耗值(先固定為一次魔力攻擊消耗2點魔力)
     if ($this->magicValue >= self::DEFAULT_MAGIC_VALUE_CONSUMPTION) {
       $target->healthPoint = $target->healthPoint - (($this->magicalAttack * self::DEFAULT_ATTACK_DAMAGE_MULTIPLIER) - $target->magicalDefense);
       $this->magicValue -= self::DEFAULT_MAGIC_VALUE_CONSUMPTION;
@@ -57,7 +55,6 @@ class Character
 
   public function restoreMagicValue()
   {
-    // 先假設魔力最大值是10點，每回合恢復1點
     if ($this->magicValue < self::DEFAULT_MAGIC_VALUE) {
       $this->magicValue += self::DEFAULT_MAGIC_VALUE_RESTORED;
     }

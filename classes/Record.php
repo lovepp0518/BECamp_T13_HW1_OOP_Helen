@@ -4,14 +4,12 @@ namespace Classes;
 
 class Record
 {
-  // Properties
   public $playerName;
   public $gameLevel;
   public $gameLevelPassed;
   public $startTime;
   public $endTime;
-
-  // Constructor
+  
   public function __construct($playerName)
   {
     $this->playerName = $playerName;

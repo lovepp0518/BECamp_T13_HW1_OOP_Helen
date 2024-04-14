@@ -4,7 +4,6 @@ namespace Classes;
 
 class Player extends Character
 {
-  // Properties
   public $career;
   public $playerLevel;
   public $experienceValue;
@@ -12,23 +11,22 @@ class Player extends Character
   const EXPERIENCE_VALUE_REQUIRED_FOR_LEVEL_UP = 300;
   const BOSS_LEVEL_INTERVAL = 5;
 
-  // Constructor
   public function __construct()
   {
-    $this->career = readline("Enter player's career(mage/warrior): ");
-    $this->name = readline("Enter player's name: ");
+    $this->career = readline("請輸入玩家職業(mage/warrior): ");
+    $this->name = readline("請輸入玩家名稱: ");
     $this->healthPoint = self::DEFAULT_HEALTH_POINT;
-    $this->physicalAttack = (int)readline("Enter player's physical attack: ");
-    $this->magicalAttack = (int)readline("Enter player's magical attack: ");
-    $this->physicalDefense = (int)readline("Enter player's physical defense: ");
-    $this->magicalDefense = (int)readline("Enter player's magical defense: ");
+    $this->physicalAttack = (int)readline("請輸入玩家物理攻擊力: ");
+    $this->magicalAttack = (int)readline("請輸入玩家魔法攻擊力: ");
+    $this->physicalDefense = (int)readline("請輸入玩家物理防禦力: ");
+    $this->magicalDefense = (int)readline("請輸入玩家魔法防禦力: ");
     $this->magicValue = self::DEFAULT_MAGIC_VALUE;
-    $this->luckValue = (int)readline("Enter player's luck value(1-5): ");
+    $this->luckValue = (int)readline("請輸入玩家幸運值(1-5): ");
     $this->playerLevel = 1;
     $this->experienceValue = 0;
   }
 
-  // 選擇攻擊方式
+  // 玩家選擇攻擊方式
   public function playerChooseAttack($target)
   {
     echo "請選擇攻擊方式 (1)物理攻擊 (2)魔法攻擊\n";
@@ -40,7 +38,7 @@ class Player extends Character
     } else if ($attackChosen == "2") {
       self::launchMagicalAttack($target);
     } else {
-      echo '無效攻擊！選擇攻擊方式無效！' . "\n";
+      echo '無效攻擊！' . "\n";
       sleep(1);
     }
   }
@@ -71,7 +69,7 @@ class Player extends Character
         $this->physicalAttack *= 2;
         $this->physicalDefense *= 2;
       } else {
-        echo 'error! Please check your career';
+        echo '輸入職業無效';
       }
     }
   }

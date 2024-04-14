@@ -14,11 +14,11 @@ class View
   public static function exitGame()
   {
     self::clearScreen();
-    echo "Thanks for playing!\n";
+    echo "已離開遊戲\n";
     exit;
   }
 
-  // 進入開始遊戲畫面
+  // 進入主選單畫面
   public static function getMenu($recordsInDB)
   {
     self::clearScreen();
@@ -46,13 +46,6 @@ class View
   {
     self::clearScreen();
     echo '新增玩家角色:' . "\n";
-  }
-
-  // 等待遊戲敵人生成
-  public static function waitForGeneratingEnemy()
-  {
-    self::clearScreen();
-    echo '遊戲敵人生成中，請稍候...' . "\n";
   }
 
   // 進入關卡

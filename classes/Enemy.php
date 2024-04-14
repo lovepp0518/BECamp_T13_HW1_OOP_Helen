@@ -25,13 +25,13 @@ class Enemy extends Character
     $faker = Faker\Factory::create();
 
     for ($i = 0; $i < 10; $i++) {
-      $pokemonNames[] = $faker->unique()->name();
+      $enemyNames[] = $faker->unique()->name();
     }
 
-    return $pokemonNames;
+    return $enemyNames;
   }
 
-  // 選擇攻擊方式
+  // 敵人選擇攻擊方式
   public function enemyChooseAttack($target)
   {
     echo '敵人發動攻擊！' . "\n";
@@ -41,7 +41,7 @@ class Enemy extends Character
     } else if ($attackChosen == "2") {
       self::launchMagicalAttack($target);
     } else {
-      echo '無效攻擊！選擇攻擊方式無效！' . "\n";
+      echo '無效攻擊！' . "\n";
     }
     sleep(1);
   }
