@@ -18,10 +18,7 @@ jobs:
           coverage: xdebug
  
       - name: Install Dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
-
-      - name: Run dump-autoload
-        run: composer dump-autoload
+        run: composer install --no-interaction --prefer-dist # --optimize-autoloader
  
       - name: Tests
         run: ./vendor/bin/pest
