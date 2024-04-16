@@ -1,5 +1,7 @@
 <?php
 
+require 'vendor/autoload.php';
+
 use Classes\Enemy;
 
 it('generates 10 unique enemy names', function () {
