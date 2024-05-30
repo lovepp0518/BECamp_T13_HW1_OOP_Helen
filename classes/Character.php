@@ -20,7 +20,7 @@ class Character
   const DEFAULT_MAGIC_VALUE_CONSUMPTION = 2;
   const DEFAULT_MAGIC_VALUE_RESTORED = 1;
 
-  private function determineCriticalHit()
+  private function isCriticalHit()
   {
     $this->criticalHitFactor = rand(1, 100);
     return $this->criticalHitFactor <= ($this->luckValue) * 10;
@@ -28,7 +28,7 @@ class Character
 
   public function launchPhysicalAttack($target)
   {
-    if (self::determineCriticalHit()) {
+    if (self::isCriticalHit()) {
       $target->healthPoint = $target->healthPoint - (($this->physicalAttack * self::DEFAULT_ATTACK_DAMAGE_MULTIPLIER) * 2 - $target->physicalDefense);
       echo "\n";
       echo '物理攻擊發動！產生爆擊傷害加倍！' . "\n";
