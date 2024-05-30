@@ -2,9 +2,15 @@
 
 namespace Classes;
 
+enum Career: string
+{
+  case Mage = 'mage';
+  case Warrior = 'warrior';
+}
+
 class Player extends Character
 {
-  public $career;
+  public Career $career;
   public $playerLevel;
   public $experienceValue;
   const EXPERIENCE_VALUE_GAIN_PER_GAME_LEVEL = 100;
@@ -13,7 +19,15 @@ class Player extends Character
 
   public function __construct()
   {
-    $this->career = readline("請輸入玩家職業(mage/warrior): ");
+    $careerInput = readline("請輸入玩家職業(mage/warrior): ");
+    if ($careerInput === 'mage') {
+      $this->career = Career::Mage;
+    } elseif ($careerInput === 'warrior') {
+      $this->career = Career::Warrior;
+    } else {
+      throw new \InvalidArgumentException('無效的職業輸入');
+    }
+
     $this->name = readline("請輸入玩家名稱: ");
     $this->healthPoint = self::DEFAULT_HEALTH_POINT;
     $this->physicalAttack = (int)readline("請輸入玩家物理攻擊力: ");
@@ -62,10 +76,10 @@ class Player extends Character
     if ($playerLevelUp >= 1) {
       $this->playerLevel += $playerLevelUp;
       $this->experienceValue -= self::EXPERIENCE_VALUE_REQUIRED_FOR_LEVEL_UP * $playerLevelUp;
-      if ($this->career === 'mage') {
+      if ($this->career === Career::Mage) {
         $this->magicalAttack *= 2;
         $this->magicalDefense *= 2;
-      } else if ($this->career === 'warrior') {
+      } else if ($this->career === Career::Warrior) {
         $this->physicalAttack *= 2;
         $this->physicalDefense *= 2;
       } else {
