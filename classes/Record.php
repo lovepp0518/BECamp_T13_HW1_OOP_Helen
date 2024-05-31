@@ -27,6 +27,6 @@ class Record
   public function getRecord($enemy)
   {
     $this->endTime = date("Y-m-d H:i:s");
-    $this->gameLevelPassed = ($enemy->healthPoint <= 0 && $this->gameLevel === 10) ? $this->gameLevel : ($this->gameLevel - 1);
+    $this->gameLevelPassed = ((!$enemy->isAlive()) && $this->gameLevel === 10) ? $this->gameLevel : ($this->gameLevel - 1);
   }
 }

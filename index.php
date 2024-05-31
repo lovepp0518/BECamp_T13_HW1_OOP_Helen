@@ -26,7 +26,7 @@ $enemy = new Enemy($enemyNames, $record->gameLevel);
 View::getGameLevel($enemy, $record->gameLevel);
 
 // 開始對戰
-while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
+while ($player->isAlive() && $enemy->isAlive()) {
   View::updateInfo($player, $enemy, $record->gameLevel);
 
   // 玩家開始攻擊
@@ -34,7 +34,7 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
   View::updateInfo($player, $enemy, $record->gameLevel);
   $player->restoreMagicValue();
 
-  if ($enemy->healthPoint <= 0) {
+  if (!$enemy->isAlive()) {
     View::getResult($record->gameLevel, $player);
     $player->gainExperienceValue($record->gameLevel);
     $player->calculatePlayerLevel();
@@ -56,7 +56,7 @@ while ($player->healthPoint > 0 && $enemy->healthPoint > 0) {
     View::updateInfo($player, $enemy, $record->gameLevel);
     $enemy->restoreMagicValue();
 
-    if ($player->healthPoint <= 0) {
+    if (!$player->isAlive()) {
       View::getResult($record->gameLevel, $enemy);
       $record->getRecord($enemy);
     }

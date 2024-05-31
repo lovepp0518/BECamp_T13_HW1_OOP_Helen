@@ -59,4 +59,10 @@ class Character
       $this->magicValue += self::DEFAULT_MAGIC_VALUE_RESTORED;
     }
   }
+
+  // 檢查角色是否活著
+  public function isAlive()
+  {
+    return $this->healthPoint > 0;
+  }
 }
