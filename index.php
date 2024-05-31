@@ -44,7 +44,7 @@ while ($player->isAlive() && $enemy->isAlive()) {
       View::announcePlayerVictory();
       $record->getRecord($enemy);
     } else {
-      $player->healthPoint = $player::DEFAULT_HEALTH_POINT;
+      $player->restoreHealthPoint();
       $record->getNextGameLevel();
       $enemy = new Enemy($enemyNames, $record->gameLevel);
       View::getGameLevel($enemy, $record->gameLevel);

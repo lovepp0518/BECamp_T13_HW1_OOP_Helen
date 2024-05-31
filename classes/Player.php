@@ -87,4 +87,9 @@ class Player extends Character
       }
     }
   }
+
+  public function restoreHealthPoint()
+  {
+    $this->healthPoint = self::DEFAULT_HEALTH_POINT;
+  }
 }
