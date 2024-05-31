@@ -72,7 +72,7 @@ class View
     printf("%-20s| %-20s\n", 'Magical defense:' . $player->magicalDefense, 'Magical defense:' . $enemy->magicalDefense);
     printf("%-20s| %-20s\n", 'Magic value:' . $player->magicValue, 'Magic value:' . $enemy->magicValue);
     printf("%-20s| %-20s\n", 'Luck value:' . $player->luckValue, 'Luck value:' . $enemy->luckValue);
-    printf("%-20s| %-20s\n", 'Career:' . $player->career, '');
+    printf("%-20s| %-20s\n", 'Career:' . $player->career->value, '');
     printf("%-20s| %-20s\n", 'Level:' . $player->playerLevel, '');
     printf("%-20s| %-20s\n", 'Experience value:' . $player->experienceValue, '');
     echo "\n";
