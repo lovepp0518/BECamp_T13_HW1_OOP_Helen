@@ -1,19 +1,18 @@
-# BECamp_T13_HW1_OOP_Helen
-A simple battle game
+# 對戰遊戲
+對戰遊戲是一個使用 OOP 概念設計的簡易遊戲，在終端機上執行。
 
-## Features
-- Create a new character and start battling.
-- View game records.
-- Leave game.
+## 功能
+多種玩家角色類型、與怪物對戰、查看遊戲紀錄
 
-## Prerequisites
+## 觀念
+OOP（Classes/Objects、Constructor、Access Modifiers、Inheritance、Class Constants、Static Methods、Namespace）
 
-- PHP 8.3.3
-- MySQL
+## 工具
+PHP、MySQL、Terminal
 
-## Installation
+## 安裝步驟
 
-1. Please make sure you have php installed first.
+1. Please make sure you have PHP and MySQL installed first.
 
 2. Clone the repository.
 
