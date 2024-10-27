@@ -1,5 +1,6 @@
 # 對戰遊戲
 對戰遊戲是一個使用 OOP 概念設計的簡易遊戲，在終端機上執行。
+<img width="1440" alt="對戰遊戲截圖" src="https://github.com/user-attachments/assets/4805972d-d480-4e5a-a0ac-e775c0317f1f">
 
 ## 功能
 多種玩家角色類型、與怪物對戰、查看遊戲紀錄
